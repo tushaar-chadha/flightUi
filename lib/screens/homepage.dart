@@ -28,8 +28,8 @@ class homePage extends StatelessWidget {
             children: [
               Text(
                 "My Tickets",
-                style:
-                    appTextStyle(AppColors.primaryColor, 22, FontWeight.w500),
+                style: appTextStyle(AppColors.primaryColor,
+                    commonSize.width * 0.05, FontWeight.w500),
               ),
               Container(
                 height: commonSize.height * 0.07,
@@ -52,13 +52,13 @@ class homePage extends StatelessWidget {
                         children: [
                           Text(
                             "Total Balance",
-                            style: appTextStyle(
-                                AppColors.blackColor, 10, FontWeight.w600),
+                            style: appTextStyle(AppColors.blackColor,
+                                commonSize.width * 0.025, FontWeight.w600),
                           ),
                           Text(
                             "Rs.10,023/-",
-                            style: appTextStyle(
-                                AppColors.blackColor, 15, FontWeight.w500),
+                            style: appTextStyle(AppColors.blackColor,
+                                commonSize.width * 0.038, FontWeight.w500),
                           ),
                         ],
                       ),
@@ -70,7 +70,7 @@ class homePage extends StatelessWidget {
                         Octicons.person,
                         color: AppColors.blackColor,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

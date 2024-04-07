@@ -6,7 +6,11 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 class DialogBox extends StatelessWidget {
-  const DialogBox({super.key});
+  DialogBox({super.key});
+  final FocusNode fromFocusNode = FocusNode();
+  final FocusNode toFocusNode = FocusNode();
+  final FocusNode whenFocusNode = FocusNode();
+  final FocusNode passengersFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -19,17 +23,17 @@ class DialogBox extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.only(bottom: 8),
                 alignment: Alignment.bottomCenter,
-                child: Text("One Way",
-                    style: appTextStyle(AppColors.blackColor,
-                        commonSize.height * 0.018, FontWeight.w600)),
                 decoration: const BoxDecoration(
                     color: AppColors.secondaryColor,
                     borderRadius:
                         BorderRadius.vertical(top: const Radius.circular(15))),
                 height: commonSize.height * 0.05,
                 width: commonSize.width * 0.3,
+                child: Text("One Way",
+                    style: appTextStyle(AppColors.blackColor,
+                        commonSize.height * 0.018, FontWeight.w600)),
               ),
               const SizedBox(
                 width: 15,
@@ -79,21 +83,26 @@ class DialogBox extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const RoundedTextField(
+                    RoundedTextField(
                       HintText: "From ?",
                       iconData: MaterialIcons.flight_takeoff,
+                      focusNode: fromFocusNode,
                     ),
-                    const RoundedTextField(
+                    RoundedTextField(
                       HintText: "where to?",
                       iconData: MaterialIcons.flight_land,
+                      focusNode: toFocusNode,
                     ),
-                    const RoundedTextField(
-                      HintText: "where to?",
+                    RoundedTextField(
+                      HintText: "when?",
                       iconData: MaterialCommunityIcons.calendar_month,
+                      focusNode: whenFocusNode,
                     ),
-                    const RoundedTextField(
-                        HintText: "Passengers: 01",
-                        iconData: MaterialIcons.person),
+                    RoundedTextField(
+                      HintText: "Passengers: 01",
+                      iconData: MaterialIcons.person,
+                      focusNode: passengersFocusNode,
+                    ),
                     GestureDetector(
                       onTap: () {},
                       child: Container(
@@ -138,9 +147,13 @@ class DialogBox extends StatelessWidget {
 class RoundedTextField extends StatelessWidget {
   final String HintText;
   final IconData iconData;
+  final FocusNode focusNode;
 
   const RoundedTextField(
-      {super.key, required this.HintText, required this.iconData});
+      {super.key,
+      required this.HintText,
+      required this.iconData,
+      required this.focusNode});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -163,6 +176,7 @@ class RoundedTextField extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 2.0),
               child: TextField(
+                focusNode: focusNode,
                 style: appTextStyle(Colors.grey.shade600, 14, FontWeight.w600),
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.symmetric(
