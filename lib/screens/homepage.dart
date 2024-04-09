@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flightui/utils/constants.dart';
 import 'package:flightui/utils/textstyles.dart';
 import 'package:flightui/widgets/destinationDialog.dart';
+import 'package:flightui/widgets/ticketWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
@@ -84,6 +87,46 @@ class homePage extends StatelessWidget {
               right: commonSize.width * 0.08),
           child: DialogBox(),
         ),
+        Padding(
+          padding: EdgeInsets.only(
+              top: commonSize.height * 0.65,
+              left: commonSize.width * 0.08,
+              right: commonSize.width * 0.08),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Popular Flight Routes",
+                style: appTextStyle(AppColors.blackColor,
+                    commonSize.width * 0.04, FontWeight.bold),
+              ),
+              Text(
+                "view all",
+                style: appTextStyle(AppColors.blackColor,
+                    commonSize.width * 0.03, FontWeight.w700),
+              )
+            ],
+          ),
+        ),
+        Padding(
+            padding: EdgeInsets.only(
+              top: commonSize.height * 0.7,
+              bottom: commonSize.height * 0.01,
+            ),
+            child: PageView.builder(
+              pageSnapping: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: 10, // Adjust this according to your needs
+              itemBuilder: (context, index) {
+                return Center(
+                  child: Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    child: const TicketShape(),
+                  ),
+                );
+              },
+            )),
       ],
     );
   }

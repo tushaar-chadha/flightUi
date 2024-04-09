@@ -62,7 +62,7 @@ class DialogBox extends StatelessWidget {
           ),
           child: Container(
             padding: const EdgeInsets.all(10),
-            height: commonSize.height * 0.45,
+            height: commonSize.height * 0.4,
             width: commonSize.width,
             decoration: BoxDecoration(
               boxShadow: [
@@ -81,7 +81,7 @@ class DialogBox extends StatelessWidget {
             child: Stack(
               children: [
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     RoundedTextField(
                       HintText: "From ?",

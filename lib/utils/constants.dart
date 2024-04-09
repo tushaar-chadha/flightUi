@@ -4,5 +4,5 @@ class AppColors {
   static const Color primaryColor = Color(0xFFF7F7F7);
   static const Color secondaryColor = Color(0xFFFFFFFF);
   static const Color blackColor = Color(0xFF000000);
-  static const Color borderColor = Color(0xFFEBEBEB);
+  static const Color borderColor = Color.fromARGB(255, 219, 219, 219);
 }
