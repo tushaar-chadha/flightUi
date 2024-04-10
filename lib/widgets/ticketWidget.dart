@@ -2,7 +2,10 @@ import 'dart:math';
 
 import 'package:flightui/utils/constants.dart';
 import 'package:flightui/utils/textstyles.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:gap/gap.dart';
 
 class TicketShape extends StatelessWidget {
@@ -95,23 +98,35 @@ class ticketContent extends StatelessWidget {
         Gap(commonSize.height * 0.015),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: commonSize.width * 0.02),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Stack(
             children: [
-              Text(
-                "10:30 AM",
-                style: appTextStyle(AppColors.blackColor,
-                    commonSize.width * 0.033, FontWeight.w600),
-              ),
-              Text(
-                "12:30 PM",
-                style: appTextStyle(AppColors.blackColor,
-                    commonSize.width * 0.033, FontWeight.w600),
+              Positioned(
+                  left: MediaQuery.of(context).size.width * 0.33,
+                  top: -2.5,
+                  child: Icon(
+                    Ionicons.airplane,
+                    size: MediaQuery.of(context).size.width * 0.06,
+                  )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "10:30 AM",
+                    style: appTextStyle(AppColors.blackColor,
+                        commonSize.width * 0.033, FontWeight.w600),
+                  ),
+                  const pointToPointWidget(),
+                  Text(
+                    "12:30 PM",
+                    style: appTextStyle(AppColors.blackColor,
+                        commonSize.width * 0.033, FontWeight.w600),
+                  ),
+                ],
               ),
             ],
           ),
         ),
-        Gap(commonSize.height * 0.04),
+        Gap(commonSize.height * 0.02),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: commonSize.width * 0.02),
           child: Row(
@@ -130,8 +145,47 @@ class ticketContent extends StatelessWidget {
             ],
           ),
         ),
-        CustomPaint(painter: ,)
       ],
+    );
+  }
+}
+
+class pointToPointWidget extends StatelessWidget {
+  const pointToPointWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10),
+        child: Row(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.015,
+              width: MediaQuery.of(context).size.height * 0.02,
+              decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.blackColor, width: 4),
+                  shape: BoxShape.circle,
+                  color: AppColors.secondaryColor),
+            ),
+            Expanded(
+              child: CustomPaint(
+                painter: DashedPainter(),
+              ),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.015,
+              width: MediaQuery.of(context).size.height * 0.02,
+              decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.blackColor, width: 4),
+                  shape: BoxShape.circle,
+                  color: AppColors.secondaryColor),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -170,26 +224,22 @@ class MyCustomClipper extends CustomClipper<Path> {
   }
 }
 
-class MyDashedLinePainter extends CustomPainter {
+class DashedPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    Path dashedLinePath = Path();
-    dashedLinePath.moveTo(0, 0);
-    double dashWidth = 3;
-    double dashSpace = 5;
-    double currentX = 0;
-    while (currentX < size.width) {
-      dashedLinePath.lineTo(currentX + dashWidth, 0);
-      currentX += dashWidth + dashSpace;
-      print(currentX);
-      dashedLinePath.moveTo(currentX, 0);
+    final Paint paint = Paint()
+      ..color = Colors.black
+      ..strokeWidth = 1
+      ..style = PaintingStyle.stroke;
+
+    final double dashWidth = 5;
+    final double dashSpace = 5;
+    double startX = 0;
+
+    while (startX < size.width) {
+      canvas.drawLine(Offset(startX, 0), Offset(startX + dashWidth, 0), paint);
+      startX += dashWidth + dashSpace;
     }
-    Paint dashedBorderPaint = Paint()
-      ..color = AppColors.borderColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2
-      ..strokeCap = StrokeCap.square;
-    canvas.drawPath(dashedLinePath, dashedBorderPaint);
   }
 
   @override
