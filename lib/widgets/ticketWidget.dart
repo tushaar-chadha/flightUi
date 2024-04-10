@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:flightui/utils/constants.dart';
+import 'package:flightui/utils/textstyles.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class TicketShape extends StatelessWidget {
   const TicketShape({
@@ -11,12 +13,14 @@ class TicketShape extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.9,
+      width: MediaQuery.of(context).size.width * 0.8,
       child: ClipPath(
         clipper: MyCustomClipper(),
         child: CustomPaint(
           painter: MyCustomPainter(),
           child: Container(
+            padding: const EdgeInsets.all(10),
+            child: ticketContent(),
             height: double.maxFinite,
             width: double.maxFinite,
             decoration: BoxDecoration(
@@ -25,6 +29,109 @@ class TicketShape extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class ticketContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var commonSize = MediaQuery.of(context).size;
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "DXB",
+                  style: appTextStyle(AppColors.blackColor,
+                      commonSize.width * 0.05, FontWeight.w600),
+                ),
+                Text(
+                  "Dubai",
+                  style: appTextStyle(AppColors.TextColor2,
+                      commonSize.width * 0.033, FontWeight.w500),
+                )
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(1.0),
+              child: Column(
+                children: [
+                  Text(
+                    "Flight Time",
+                    style: appTextStyle(AppColors.TextColor2,
+                        commonSize.width * 0.045, FontWeight.w600),
+                  ),
+                  Text(
+                    "1H 30M",
+                    style: appTextStyle(AppColors.blackColor,
+                        commonSize.width * 0.035, FontWeight.w700),
+                  )
+                ],
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  "DEL",
+                  style: appTextStyle(AppColors.blackColor,
+                      commonSize.width * 0.05, FontWeight.w600),
+                ),
+                Text(
+                  "Delhi",
+                  style: appTextStyle(AppColors.TextColor2,
+                      commonSize.width * 0.033, FontWeight.w500),
+                )
+              ],
+            )
+          ],
+        ),
+        Gap(commonSize.height * 0.015),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: commonSize.width * 0.02),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "10:30 AM",
+                style: appTextStyle(AppColors.blackColor,
+                    commonSize.width * 0.033, FontWeight.w600),
+              ),
+              Text(
+                "12:30 PM",
+                style: appTextStyle(AppColors.blackColor,
+                    commonSize.width * 0.033, FontWeight.w600),
+              ),
+            ],
+          ),
+        ),
+        Gap(commonSize.height * 0.04),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: commonSize.width * 0.02),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Indigo Airlines",
+                style: appTextStyle(AppColors.blackColor,
+                    commonSize.width * 0.05, FontWeight.w600),
+              ),
+              Text(
+                '\$199 ',
+                style: appTextStyle(AppColors.blackColor,
+                    commonSize.width * 0.04, FontWeight.w700),
+              ),
+            ],
+          ),
+        ),
+        CustomPaint(painter: ,)
+      ],
     );
   }
 }
@@ -63,6 +170,34 @@ class MyCustomClipper extends CustomClipper<Path> {
   }
 }
 
+class MyDashedLinePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Path dashedLinePath = Path();
+    dashedLinePath.moveTo(0, 0);
+    double dashWidth = 3;
+    double dashSpace = 5;
+    double currentX = 0;
+    while (currentX < size.width) {
+      dashedLinePath.lineTo(currentX + dashWidth, 0);
+      currentX += dashWidth + dashSpace;
+      print(currentX);
+      dashedLinePath.moveTo(currentX, 0);
+    }
+    Paint dashedBorderPaint = Paint()
+      ..color = AppColors.borderColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2
+      ..strokeCap = StrokeCap.square;
+    canvas.drawPath(dashedLinePath, dashedBorderPaint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
+  }
+}
+
 class MyCustomPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -94,6 +229,7 @@ class MyCustomPainter extends CustomPainter {
     while (currentX < size.width) {
       dashedLinePath.lineTo(currentX + dashWidth, semiCircleCenterY);
       currentX += dashWidth + dashSpace;
+      print(currentX);
       dashedLinePath.moveTo(currentX, semiCircleCenterY);
     }
     Paint dashedBorderPaint = Paint()
