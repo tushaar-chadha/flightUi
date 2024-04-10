@@ -98,32 +98,40 @@ class ticketContent extends StatelessWidget {
         Gap(commonSize.height * 0.015),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: commonSize.width * 0.02),
-          child: Stack(
-            children: [
-              Positioned(
-                  left: MediaQuery.of(context).size.width * 0.33,
-                  top: -2.5,
-                  child: Icon(
-                    Ionicons.airplane,
-                    size: MediaQuery.of(context).size.width * 0.06,
-                  )),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "10:30 AM",
-                    style: appTextStyle(AppColors.blackColor,
-                        commonSize.width * 0.033, FontWeight.w600),
+          child: SizedBox(
+            height: commonSize.height * 0.03,
+            child: Stack(
+              children: [
+                Expanded(
+                  child: Positioned(
+                      left: MediaQuery.of(context).size.width * 0.33,
+                      child: Icon(
+                        Ionicons.airplane,
+                        size: MediaQuery.of(context).size.width * 0.06,
+                      )),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.width * 0.012),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "10:30 AM",
+                        style: appTextStyle(AppColors.blackColor,
+                            commonSize.width * 0.033, FontWeight.w600),
+                      ),
+                      const pointToPointWidget(),
+                      Text(
+                        "12:30 PM",
+                        style: appTextStyle(AppColors.blackColor,
+                            commonSize.width * 0.033, FontWeight.w600),
+                      ),
+                    ],
                   ),
-                  const pointToPointWidget(),
-                  Text(
-                    "12:30 PM",
-                    style: appTextStyle(AppColors.blackColor,
-                        commonSize.width * 0.033, FontWeight.w600),
-                  ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
         Gap(commonSize.height * 0.02),
