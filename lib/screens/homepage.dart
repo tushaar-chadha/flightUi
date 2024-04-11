@@ -24,15 +24,15 @@ class homePage extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(commonSize.width * 0.1,
-              commonSize.height * 0.06, commonSize.width * 0.1, 0),
+          padding: EdgeInsets.fromLTRB(commonSize.width * 0.05,
+              commonSize.height * 0.06, commonSize.width * 0.05, 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "My Tickets",
                 style: appTextStyle(AppColors.primaryColor,
-                    commonSize.width * 0.05, FontWeight.w500),
+                    commonSize.width * 0.05, FontWeight.w700),
               ),
               Container(
                 height: commonSize.height * 0.07,
@@ -67,8 +67,8 @@ class homePage extends StatelessWidget {
                       ),
                     ),
                     CircleAvatar(
-                      radius: (commonSize.width * 0.135) / 2,
-                      backgroundColor: Colors.brown.shade200,
+                      radius: (commonSize.width * 0.135) / 2.2,
+                      backgroundColor: Colors.grey.shade400,
                       child: const Icon(
                         Octicons.person,
                         color: AppColors.blackColor,
@@ -82,7 +82,7 @@ class homePage extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.only(
-              top: commonSize.height * 0.18,
+              top: commonSize.height * 0.14,
               left: commonSize.width * 0.08,
               right: commonSize.width * 0.08),
           child: DialogBox(),

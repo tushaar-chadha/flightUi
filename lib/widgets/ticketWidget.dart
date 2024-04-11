@@ -1,10 +1,7 @@
 import 'dart:math';
-
 import 'package:flightui/utils/constants.dart';
 import 'package:flightui/utils/textstyles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:gap/gap.dart';
 
@@ -17,6 +14,7 @@ class TicketShape extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.8,
+      height: MediaQuery.of(context).size.height * 0.2,
       child: ClipPath(
         clipper: MyCustomClipper(),
         child: CustomPaint(
@@ -40,6 +38,7 @@ class ticketContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var commonSize = MediaQuery.of(context).size;
+   
     return Column(
       children: [
         Row(
@@ -95,24 +94,25 @@ class ticketContent extends StatelessWidget {
             )
           ],
         ),
-        Gap(commonSize.height * 0.015),
+        Gap(commonSize.height * 0.01),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: commonSize.width * 0.02),
-          child: SizedBox(
-            height: commonSize.height * 0.03,
+          child: Container(
+            height: commonSize.height * 0.05,
             child: Stack(
               children: [
-                Expanded(
-                  child: Positioned(
-                      left: MediaQuery.of(context).size.width * 0.33,
-                      child: Icon(
-                        Ionicons.airplane,
-                        size: MediaQuery.of(context).size.width * 0.06,
-                      )),
+                Padding(
+                  padding:
+                      EdgeInsets.fromLTRB(commonSize.width * 0.321, 0, 0, 0),
+                  child: Icon(
+                    Ionicons.airplane,
+                    size: MediaQuery.of(context).size.width * 0.075,
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.width * 0.012),
+                    top: 7.5,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -134,7 +134,7 @@ class ticketContent extends StatelessWidget {
             ),
           ),
         ),
-        Gap(commonSize.height * 0.02),
+        Gap(MediaQuery.of(context).size.height * 0.014),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: commonSize.width * 0.02),
           child: Row(
@@ -166,33 +166,37 @@ class pointToPointWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.015,
-              width: MediaQuery.of(context).size.height * 0.02,
-              decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.blackColor, width: 4),
-                  shape: BoxShape.circle,
-                  color: AppColors.secondaryColor),
+      child: Stack(
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.015,
+                  width: MediaQuery.of(context).size.height * 0.02,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.blackColor, width: 4),
+                      shape: BoxShape.circle,
+                      color: AppColors.secondaryColor),
+                ),
+                Expanded(
+                  child: CustomPaint(
+                    painter: DashedPainter(),
+                  ),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.015,
+                  width: MediaQuery.of(context).size.height * 0.02,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.blackColor, width: 4),
+                      shape: BoxShape.circle,
+                      color: AppColors.secondaryColor),
+                ),
+              ],
             ),
-            Expanded(
-              child: CustomPaint(
-                painter: DashedPainter(),
-              ),
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.015,
-              width: MediaQuery.of(context).size.height * 0.02,
-              decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.blackColor, width: 4),
-                  shape: BoxShape.circle,
-                  color: AppColors.secondaryColor),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -287,7 +291,7 @@ class MyCustomPainter extends CustomPainter {
     while (currentX < size.width) {
       dashedLinePath.lineTo(currentX + dashWidth, semiCircleCenterY);
       currentX += dashWidth + dashSpace;
-      print(currentX);
+     
       dashedLinePath.moveTo(currentX, semiCircleCenterY);
     }
     Paint dashedBorderPaint = Paint()

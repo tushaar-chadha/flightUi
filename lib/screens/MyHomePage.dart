@@ -61,19 +61,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
 BottomNavigationBarItem bottomNavBarItem(IconData icon, IconData ActiveIcon) {
   return BottomNavigationBarItem(
-      icon: Padding(
-        padding: const EdgeInsets.only(bottom: 10.0),
-        child: Icon(
-          icon,
-          size: 28,
-        ),
+    icon: Padding(
+      padding: const EdgeInsets.only(bottom: 10.0),
+      child: Icon(
+        icon,
+        size: 28,
       ),
-      label: "",
-      activeIcon: Padding(
-        padding: const EdgeInsets.only(bottom: 10.0),
-        child: Icon(
-          ActiveIcon,
-          size: 30,
-        ),
-      ));
+    ),
+    label: "",
+    activeIcon: Padding(
+      padding: const EdgeInsets.only(bottom: 10.0),
+      child: Icon(
+        ActiveIcon,
+        size: 30,
+      ),
+    ),
+  );
 }
