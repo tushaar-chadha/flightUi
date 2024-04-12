@@ -14,8 +14,8 @@
     <li>Responsiveness implemented to ensure optimal user experience across different devices.</li>
 </ul>
 
-## Screenshots
-| <img src="https://github.com/Tushar-chadha/flightui/blob/main/lib/gifs/Simulator%20Screen%20Recording%20-%20iPhone%2015%20Pro%20Max%20-%202024-04-12%20at%2022.06.11.gif" alt="HomePage.gif" width="150"> | <img src="https://github.com/Tushar-chadha/flightui/raw/main/lib/gifs/Simulator%20Screen%20Recording%20-%20iPhone%2015%20Pro%20Max%20-%202024-04-12%20at%2022.05.08.gif" alt="Flight App UI ticketScreen.gif" width="150"> |
+## Gifs 
+| <img src="https://github.com/Tushar-chadha/flightUi/blob/main/lib/gifs/gif2.gif" alt="HomePage.gif" width="150"> | <img src="https://github.com/Tushar-chadha/flightUi/blob/main/lib/gifs/gif-1.gif" alt="Flight App UI ticketScreen.gif" width="150"> |
 |---|---|
 | HomePage | TicketScreen |
 
