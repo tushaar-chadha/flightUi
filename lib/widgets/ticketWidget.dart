@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flightui/utils/constants.dart';
 import 'package:flightui/utils/textstyles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:gap/gap.dart';
 
@@ -38,7 +39,7 @@ class ticketContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var commonSize = MediaQuery.of(context).size;
-   
+
     return Column(
       children: [
         Row(
@@ -134,23 +135,25 @@ class ticketContent extends StatelessWidget {
             ),
           ),
         ),
-        Gap(MediaQuery.of(context).size.height * 0.014),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: commonSize.width * 0.02),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Indigo Airlines",
-                style: appTextStyle(AppColors.blackColor,
-                    commonSize.width * 0.05, FontWeight.w600),
-              ),
-              Text(
-                '\$199 ',
-                style: appTextStyle(AppColors.blackColor,
-                    commonSize.width * 0.04, FontWeight.w700),
-              ),
-            ],
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(commonSize.width * 0.03,
+                commonSize.height * 0.018, 0, commonSize.width * 0.02),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Indigo Airlines",
+                  style: appTextStyle(AppColors.blackColor,
+                      commonSize.width * 0.05, FontWeight.w600),
+                ),
+                Text(
+                  '\$199 ',
+                  style: appTextStyle(AppColors.blackColor,
+                      commonSize.width * 0.04, FontWeight.w700),
+                ),
+              ],
+            ),
           ),
         ),
       ],
@@ -291,7 +294,7 @@ class MyCustomPainter extends CustomPainter {
     while (currentX < size.width) {
       dashedLinePath.lineTo(currentX + dashWidth, semiCircleCenterY);
       currentX += dashWidth + dashSpace;
-     
+
       dashedLinePath.moveTo(currentX, semiCircleCenterY);
     }
     Paint dashedBorderPaint = Paint()
